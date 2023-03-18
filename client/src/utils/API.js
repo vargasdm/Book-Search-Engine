@@ -54,10 +54,10 @@ export const deleteBook = (bookId, token) => {
 
 // make a search to google books api
 // https://www.googleapis.com/books/v1/volumes?q=harry+potter
-// export const searchGoogleBooks = (query) => {
-//   return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-// };
+export const searchGoogleBooks = (query) => {
+  return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+};
 
-// Using axios, we create a search method that is specific to our use case and export it at the bottom
-export const searchGoogleBooks = (query) =>
-  axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+// // Using axios, we create a search method that is specific to our use case and export it at the bottom
+// export const searchGoogleBooks = (query) =>
+//   axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
