@@ -2,21 +2,6 @@ const { Book, User } = require('../models');
 
 const resolvers = {
     Query: {
-        // books: async () => {
-        //     return await Book.find({}).populate('title').populate('authors').populate('description').populate('image').populate('link');
-        // },
-        // users: async () => {
-        //     //get all users and show their saved books
-        //     return await User.find({}).populate({
-        //         path: "books",
-        //         populate: "savedBooks",
-        //     });
-        // },
-        // //get a book by id
-        // book: async (parent, {bookId}) => {
-        //     return await Book.findById(bookId).populate("authors").populate('description').populate('image').populate('link');
-        // },
-        //get a user by id
         me: async (parent, args, context) => {
             if (context.user) {
                 return User.findOne({ _id: context.user._id });
