@@ -3,7 +3,7 @@ const path = require('path');
 // for apollo server
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
-// const routes = require('./routes');
+const routes = require('./routes');
 
 // for apollo server
 const { ApolloServer } = require('apollo-server-express');
@@ -37,12 +37,13 @@ app.get('/', (req, res) => {
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
   server.applyMiddleware({ app });
+  db.once('open', () => {
+    app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
+    console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+  });
 }
 
-db.once('open', () => {
-  app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
-  console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-});
+
 
 // Call the async function to start the server
 startApolloServer(typeDefs, resolvers);
