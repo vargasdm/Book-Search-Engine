@@ -8,7 +8,7 @@ import {
 } from 'react-bootstrap';
 
 import { useMutation, useQuery } from '@apollo/client';
-import { getMe, deleteBook } from '../utils/API';
+// import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 import { REMOVE_BOOK } from '../utils/mutations';
@@ -19,6 +19,7 @@ const SavedBooks = () => {
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
   const {loading, data} = useQuery(GET_ME);
+  const [removeBook, { error }] = useMutation(REMOVE_BOOK);
 
   const userData = data?.me || {};
   // useEffect(() => {
@@ -55,21 +56,16 @@ const SavedBooks = () => {
     }
 
     try {
-      const [removeBook, { error, data }] = useMutation(REMOVE_BOOK);
-      const response = await removeBook(bookId, token);
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      // const updatedUser = await response.json();
-      // setUserData(updatedUser);
-      // upon success, remove book's id from localStorage
+      const {data} = await removeBook({
+        variables: {bookId},
+      });
+      
       removeBookId(bookId);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+      } catch (err) {
+      console.log(err)
+      }
+      };
 
   // if data isn't here yet, say so
   if (!userDataLength) {
