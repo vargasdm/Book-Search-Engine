@@ -13,8 +13,8 @@ const resolvers = {
             });
         },
         //get a book by id
-        book: async (parent, args) => {
-            return await Book.findById(args.bookId).populate("authors").populate('description').populate('image').populate('link');
+        book: async (parent, {bookId}) => {
+            return await Book.findById(bookId).populate("authors").populate('description').populate('image').populate('link');
         },
         //get a user by id
         me: async (parent, args, context) => {
@@ -48,12 +48,12 @@ const resolvers = {
 
             return { token, user };
         },
-        saveBook: async (parent, { userId, savedBook }, context) => {
+        saveBook: async (parent, { bookId, authors, description, title, link }, context) => {
             if (context.user) {
                 return User.findOneAndUpdate(
-                    { _id: userId },
+                    { _bookId: bookId },
                     {
-                        $addToSet: { savedBooks: savedBook },
+                        $addToSet: { savedBooks: bookId },
                     },
                     {
                         new: true,
