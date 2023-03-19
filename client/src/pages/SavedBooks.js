@@ -13,15 +13,17 @@ import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 import { REMOVE_BOOK } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
-const SavedBooks = () => {
-  // const [userData, setUserData] = useState({});
 
+
+const SavedBooks = () => {
+  const [userData, setUserData] = useState({});
+  userData = data?.me || {};
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
   const {loading, data} = useQuery(GET_ME);
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
 
-  const userData = data?.me || {};
+ 
   // useEffect(() => {
   //   const getUserData = async () => {
   //     try {

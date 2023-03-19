@@ -7,7 +7,15 @@ query me {
       username
       email
       password
-      savedBooks
+      savedBooks{
+        bookId
+        authors
+        description
+        title
+        link
+        image
+        
+      }
     }
   }
-`;
+`
