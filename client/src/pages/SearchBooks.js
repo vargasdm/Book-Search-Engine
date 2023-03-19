@@ -10,7 +10,7 @@ import {
 
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
-import { saveBook, searchGoogleBooks } from '../utils/API';
+// import { saveBook, searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import { SAVE_BOOK } from '../utils/mutations';
 
@@ -79,10 +79,10 @@ const SearchBooks = () => {
     }
 
     try {
-      const {data} = await saveBook({
-        variables: {bookData: {...bookToSave}},
+      const { data } = await saveBook({
+        variables: { bookData: { ...bookToSave } },
       });
-      
+
 
       // if (!response.ok) {
       //   throw new Error('something went wrong!');
