@@ -41,7 +41,7 @@ const resolvers = {
                 return User.findOneAndUpdate(
                     { _id: context.user._id },
                     {
-                        $addToSet: { savedBooks: {bookId, authors, description, title, link} },
+                        $addToSet: { savedBooks: { bookId, authors, description, title, link } },
                     },
                     {
                         new: true,
@@ -51,11 +51,11 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
-        removeBook: async (parent, { savedBook }, context) => {
+        removeBook: async (parent, { bookId }, context) => {
             if (context.user) {
-                return Profile.findOneAndUpdate(
+                return User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $pull: { savedBooks: savedBook } },
+                    { $pull: { savedBooks: { bookId } } },
                     { new: true }
                 );
             }

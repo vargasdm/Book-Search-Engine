@@ -14,7 +14,6 @@ query me {
         title
         link
         image
-        
       }
     }
   }
