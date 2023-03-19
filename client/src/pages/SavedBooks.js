@@ -16,12 +16,12 @@ import { GET_ME } from '../utils/queries';
 
 
 const SavedBooks = () => {
-  const [userData, setUserData] = useState({});
-  userData = data?.me || {};
-  // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
-  const {loading, data} = useQuery(GET_ME);
-  const [removeBook, { error }] = useMutation(REMOVE_BOOK);
+// const [userData, setUserData] = useState({});
+const {loading, data} = useQuery(GET_ME);
+const userData = data?.me || {};
+// use this to determine if `useEffect()` hook needs to run again
+const userDataLength = Object.keys(userData).length;
+const [removeBook, { error }] = useMutation(REMOVE_BOOK);
 
  
   // useEffect(() => {
@@ -90,8 +90,8 @@ const SavedBooks = () => {
         <Row>
           {userData.savedBooks.map(( book) => {
             return (
-              <Col md="4">
-                <Card key={book.bookId} border='dark'>
+              <Col key={book.bookId} md="4">
+                <Card border='dark'>
                   {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
                   <Card.Body>
                     <Card.Title>{book.title}</Card.Title>
