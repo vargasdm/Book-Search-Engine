@@ -6,7 +6,7 @@ export const LOGIN_USER = gql`
       token
       user {
         _id
-        username
+        email
       }
     }
   }
@@ -23,6 +23,7 @@ export const ADD_USER = gql`
     }
   }
 `;
+
 export const SAVE_BOOK = gql`
   mutation saveBook($bookId: String!, $authors: String!, $description: String!, $title: String!, $link: String!) {
     saveBook(bookId: $bookId, authors: $authors, description: $description, title: $title, link: $link) {
